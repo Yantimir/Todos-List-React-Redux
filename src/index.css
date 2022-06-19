@@ -32,3 +32,9 @@ body {
 .todo__list-controll {
     display: flex;
 }
+
+.todo__info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

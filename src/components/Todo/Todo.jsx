@@ -11,10 +11,10 @@ export const Todo = ({ id, text, completed }) => {
     const editId = useSelector(state => state.todos.editId);
     let flagCompleted = completed ? { textDecoration: "line-through" } : { textDecoration: "none" };
 
-
     const editTask = () => {
         dispatch(addEditTodo({ id, editTextTodo }));
     }
+
     return (
         <div className="todo__list" key={id}>
             <Paper sx={{ p: "10px" }}>
@@ -30,7 +30,7 @@ export const Todo = ({ id, text, completed }) => {
                                 variant="outlined"
                                 autoComplete="off"
                                 multiline={true}
-                                rows={10}
+                                maxRows={10}
                             />
                             <IconButton
                                 onClick={editTask}
