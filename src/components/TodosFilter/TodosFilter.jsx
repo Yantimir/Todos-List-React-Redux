@@ -1,46 +1,40 @@
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { filterTodos } from "../../store/todoSlice";
-import { Box, Button, ButtonGroup } from "@mui/material";
+import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 
 export const TodosFilter = () => {
 
     const dispatch = useDispatch();
-    // const filterStatus = useSelector(state => state.todos.filter);
     const updateFilterStatus = (status) => {
         dispatch(filterTodos(status));
     }
 
     return (
-        <>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    '& > *': {
-                        mb: 3,
-                    },
-                }}
-            >
-                <ButtonGroup variant="outlined" aria-label="outlined button group">
-                    <Button
-                        onClick={() => updateFilterStatus("all")}
-                    >
-                        All
-                    </Button>
-                    <Button
-                        onClick={() => updateFilterStatus(false)}
-                    >
-                        Active
-                    </Button>
-                    <Button
-                        onClick={() => updateFilterStatus(true)}
-                    >
-                        Done
-                    </Button>
-                </ButtonGroup>
-
-            </Box>
-        </>
+        <div style={{margin: "0 0 20px 20px"}}>
+            <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label">Filter Tasks</FormLabel>
+                <RadioGroup
+                    row
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue="all"
+                >
+                    <FormControlLabel
+                        value="all"
+                        control={<Radio onClick={() => updateFilterStatus("all")}/>}
+                        label="All"
+                    />
+                    <FormControlLabel
+                        value="active"
+                        control={<Radio onClick={() => updateFilterStatus(false)}/>}
+                        label="Active"
+                    />
+                    <FormControlLabel
+                        value="done"
+                        control={<Radio onClick={() => updateFilterStatus(true)}/>}
+                        label="Done"
+                    />
+                </RadioGroup>
+            </FormControl>
+        </div>
     )
 }

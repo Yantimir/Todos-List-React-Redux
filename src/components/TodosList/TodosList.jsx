@@ -7,21 +7,19 @@ export const TodosList = () => {
 
     // const todos = useSelector(state => state.todos.todos);
     const todosFilter = useSelector(state => state.todos.todosFilter);
-    // console.log(todosFilter)
 
     return (
         <>
-            {todosFilter.length > 0
+            {todosFilter && todosFilter.length > 0
                 ? todosFilter.map(todo => (<Todo key={todo.id} {...todo} />))
                 : <div className="todo__info">
-                    <InfoOutlinedIcon sx={{color: "red", mr: "10px"}} />
+                    <InfoOutlinedIcon sx={{ color: "red", mr: "10px" }} />
                     <Typography
                         variant="h6"
                     >
                         No tasks content
                     </Typography>
                 </div>
-
             }
         </>
     )

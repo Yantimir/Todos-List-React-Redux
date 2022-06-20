@@ -1,6 +1,5 @@
 import { Box, AppBar, Toolbar, Typography } from "@mui/material";
 
-
 export default function ButtonAppBar() {
     return (
         <Box sx={{ flexGrow: 1, mb: "40px" }}>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTodo } from "./store/todoSlice";
+import toast from "react-hot-toast";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Container } from "@mui/material";
@@ -9,6 +10,9 @@ import Header from "./components/Header/Header";
 import { TodosList } from "./components/TodosList/TodosList";
 import { AddTodo } from "./components/AddTodo/AddTodo";
 import { TodosFilter } from "./components/TodosFilter/TodosFilter";
+
+import { v4 as uuidv4 } from 'uuid'; /* https://www.npmjs.com/package/uuid */
+import { Toaster } from "react-hot-toast"; /* https://react-hot-toast.com/ */
 
 const theme = createTheme({
     palette: {
@@ -38,18 +42,40 @@ function App() {
 
     const dispatch = useDispatch();
     const [text, setText] = useState("");
+    const [completed] = useState(false);
 
     const addTask = () => {
-        if (text !== "") {
-            dispatch(addTodo({ text }));
+        if (text) {
+            dispatch(
+                addTodo({
+                    id: uuidv4(),
+                    text,
+                    completed,
+                    time: new Date().toLocaleString()
+                })
+            );
             setText("");
+            toast.success("Task Added Successfully");
         }
+        // else {
+        //     toast.error("You have not created a new task");
+        // }
     }
     const addTaskEnter = (e) => {
-        if (e.key === "Enter" && text !== "") {
-            dispatch(addTodo({ text }));
+        if (e.key === "Enter" && text) {
+            // dispatch(addTodo({ text }));
+            dispatch(addTodo({
+                id: uuidv4(),
+                text,
+                completed,
+                time: new Date().toLocaleString()
+            }));
             setText("");
+            toast.success("Task Added Successfully");
         }
+        // else {
+        //     toast.error("You have not created a new task");
+        // }
     }
 
     return (
@@ -67,6 +93,7 @@ function App() {
                     handleKeyPress={addTaskEnter}
                 />
                 <TodosList />
+                <Toaster />
             </Container >
         </ThemeProvider >
     );

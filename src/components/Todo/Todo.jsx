@@ -4,7 +4,7 @@ import { deleteTodo, toggleTodoCompleted, editTodos, backEditTodos, addEditTodo 
 import { Add, Delete, Edit, Replay } from "@mui/icons-material";
 import { Checkbox, IconButton, Paper, TextField, Typography } from "@mui/material";
 
-export const Todo = ({ id, text, completed }) => {
+export const Todo = ({ id, text, completed, time }) => {
 
     const [editTextTodo, setEditTextTodo] = useState(text);
     const dispatch = useDispatch();
@@ -50,12 +50,19 @@ export const Todo = ({ id, text, completed }) => {
                                     checked={completed}
                                     onClick={() => dispatch(toggleTodoCompleted({ id }))}
                                 />
-                                <Typography
-                                    variant="h6"
-                                    sx={flagCompleted}
-                                >
-                                    {text}
-                                </Typography>
+                                <div>
+                                    <Typography
+                                        variant="h6"
+                                        sx={flagCompleted}
+                                    >
+                                        {text}
+                                    </Typography>
+                                    <Typography
+                                        variant="body2"
+                                    >
+                                        {time}
+                                    </Typography>
+                                </div>
                             </div>
                             <div className="todo__list-controll">
                                 <IconButton
