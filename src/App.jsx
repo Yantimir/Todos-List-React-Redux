@@ -63,7 +63,6 @@ function App() {
     }
     const addTaskEnter = (e) => {
         if (e.key === "Enter" && text) {
-            // dispatch(addTodo({ text }));
             dispatch(addTodo({
                 id: uuidv4(),
                 text,

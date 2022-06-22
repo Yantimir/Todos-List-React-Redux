@@ -1,40 +1,25 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { filterTodos } from "../../store/todoSlice";
-import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
+import { Button, ButtonGroup } from "@mui/material";
 
 export const TodosFilter = () => {
 
     const dispatch = useDispatch();
+    const todos = useSelector(state => state.todos.todos);
+    const sumActive = todos.filter(todo => todo.completed === false);
+    const sumDone = todos.filter(todo => todo.completed === true);
+
     const updateFilterStatus = (status) => {
         dispatch(filterTodos(status));
     }
 
     return (
-        <div style={{margin: "0 0 20px 20px"}}>
-            <FormControl>
-                <FormLabel id="demo-radio-buttons-group-label">Filter Tasks</FormLabel>
-                <RadioGroup
-                    row
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="all"
-                >
-                    <FormControlLabel
-                        value="all"
-                        control={<Radio onClick={() => updateFilterStatus("all")}/>}
-                        label="All"
-                    />
-                    <FormControlLabel
-                        value="active"
-                        control={<Radio onClick={() => updateFilterStatus(false)}/>}
-                        label="Active"
-                    />
-                    <FormControlLabel
-                        value="done"
-                        control={<Radio onClick={() => updateFilterStatus(true)}/>}
-                        label="Done"
-                    />
-                </RadioGroup>
-            </FormControl>
+        <div className="filter__status">
+            <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                <Button onClick={() => updateFilterStatus("all")}>{`All ${todos.length}`}</Button>
+                <Button onClick={() => updateFilterStatus(false)}>{`Active ${sumActive.length}`}</Button>
+                <Button onClick={() => updateFilterStatus(true)}>{`Done ${sumDone.length}`}</Button>
+            </ButtonGroup>
         </div>
     )
 }

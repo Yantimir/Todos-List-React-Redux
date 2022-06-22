@@ -34,11 +34,11 @@ export const todoSlice = createSlice({
             state.todosFilter = filteredTodos(state.filter, state.todos);
         },
         editTodos: (state, action) => {
-            state.editId = state.todos.filter(todo => todo.id === action.payload.id);
+            // state.editId = state.todos.filter(todo => todo.id === action.payload.id);
             state.editId = action.payload.id;
         },
         backEditTodos: (state, action) => {
-            state.editId = state.todos.filter(todo => todo.id === action.payload.id);
+            // state.editId = state.todos.filter(todo => todo.id === action.payload.id);
             state.editId = "";
         },
         addEditTodo: (state, action) => {
