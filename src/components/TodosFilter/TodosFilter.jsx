@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { filterTodos } from "../../store/todoSlice";
-import { Button, ButtonGroup } from "@mui/material";
+import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 
 export const TodosFilter = () => {
 
@@ -14,12 +14,30 @@ export const TodosFilter = () => {
     }
 
     return (
-        <div className="filter__status">
-            <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                <Button onClick={() => updateFilterStatus("all")}>{`All ${todos.length}`}</Button>
-                <Button onClick={() => updateFilterStatus(false)}>{`Active ${sumActive.length}`}</Button>
-                <Button onClick={() => updateFilterStatus(true)}>{`Done ${sumDone.length}`}</Button>
-            </ButtonGroup>
+        <div style={{ margin: "0 0 20px 20px" }}>
+            <FormControl>
+                <FormLabel>Filter Tasks</FormLabel>
+                <RadioGroup
+                    row
+                    defaultValue="all"
+                >
+                    <FormControlLabel
+                        value="all"
+                        control={<Radio onClick={() => updateFilterStatus("all")} />}
+                        label={`All ${todos.length}`}
+                    />
+                    <FormControlLabel
+                        value="active"
+                        control={<Radio onClick={() => updateFilterStatus(false)} />}
+                        label={`Active ${sumActive.length}`}
+                    />
+                    <FormControlLabel
+                        value="done"
+                        control={<Radio onClick={() => updateFilterStatus(true)} />}
+                        label={`Done ${sumDone.length}`}
+                    />
+                </RadioGroup>
+            </FormControl>
         </div>
     )
 }
